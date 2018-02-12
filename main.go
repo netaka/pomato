@@ -3,7 +3,8 @@ package main
 import (
   "flag"
   "fmt"
-  "./slack"
+  "github.com/netaka/pomato/slack"
+  "github.com/netaka/pomato/line"
 )
 
 var (
@@ -14,5 +15,6 @@ func main() {
   flag.Parse()
   fmt.Println(*message);
   slack.Post(*message);
+  line.Post(*message);
 }
 
