@@ -11,6 +11,12 @@ var (
   ID = "<ID>"
 )
 
+func Init(token string, secret string, id string) {
+  channelAccessToken = token
+  channelSecret = secret
+  ID = id
+}
+
 func Post(text string) {
   bot, err := linebot.New(channelSecret, channelAccessToken)
   if err != nil {

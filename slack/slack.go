@@ -19,6 +19,10 @@ var (
   apiToken = "xxxx-xxxxxxxxx-xxxx"
 )
 
+func Init(token string) {
+  apiToken = token
+}
+
 func Post(text string) {
   arguments := Arguments{
     Channel: "#general",
