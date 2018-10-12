@@ -1,29 +1,28 @@
 package main
 
 import (
-  "flag"
-  "fmt"
-  "github.com/kazuph/go-binenv"
-  "github.com/netaka/pomato/slack"
-  "github.com/netaka/pomato/line"
+	"flag"
+	"fmt"
+	"github.com/kazuph/go-binenv"
+	"github.com/netaka/pomato/line"
+	"github.com/netaka/pomato/slack"
 )
 
 var (
-  message = flag.String("m", "undefined", "message string")
+	message = flag.String("m", "undefined", "message string")
 )
 
 func main() {
-  env, err := binenv.Load(Asset)
-  if err != nil {
-    fmt.Println(err)
-  }
+	env, err := binenv.Load(Asset)
+	if err != nil {
+		fmt.Println(err)
+	}
 
-  slack.Init(env["SLACK_TOKEN"])
-  line.Init(env["LINE_CHANNEL_ACCESS_TOKEN"], env["LINE_CHANNEL_SECRET"], env["LINE_USER_ID"])
+	slack.Init(env["SLACK_TOKEN"])
+	line.Init(env["LINE_CHANNEL_ACCESS_TOKEN"], env["LINE_CHANNEL_SECRET"], env["LINE_USER_ID"])
 
-  flag.Parse()
-  fmt.Println(*message);
-  slack.Post(*message);
-  line.Post(*message);
+	flag.Parse()
+	fmt.Println(*message)
+	slack.Post(*message)
+	line.Post(*message)
 }
-
