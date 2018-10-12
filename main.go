@@ -20,7 +20,7 @@ func main() {
 		fmt.Println(err)
 	}
 
-	slack.Init(env["SLACK_TOKEN"])
+	slack.Init(env["SLACK_TOKEN"], env["SLACK_CHANNEL"])
 	line.Init(env["LINE_CHANNEL_ACCESS_TOKEN"], env["LINE_CHANNEL_SECRET"], env["LINE_USER_ID"])
 
 	flag.Parse()
