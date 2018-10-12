@@ -9,7 +9,9 @@ import (
 )
 
 var (
-	message = flag.String("m", "undefined", "message string")
+	message     = flag.String("m", "undefined", "message string")
+	enableSlack = flag.Bool("s", false, "enable posting to Slack")
+	enableLine  = flag.Bool("l", false, "enable posting to LINE")
 )
 
 func main() {
@@ -23,6 +25,10 @@ func main() {
 
 	flag.Parse()
 	fmt.Println(*message)
-	slack.Post(*message)
-	line.Post(*message)
+	if *enableSlack {
+		slack.Post(*message)
+	}
+	if *enableLine {
+		line.Post(*message)
+	}
 }
