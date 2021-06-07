@@ -3,7 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/kazuph/go-binenv"
+    "encoding/json"
+    _ "embed"
 	"github.com/netaka/pomato/line"
 	"github.com/netaka/pomato/slack"
 )
@@ -14,14 +15,22 @@ var (
 	enableLine  = flag.Bool("l", false, "enable posting to LINE")
 )
 
-func main() {
-	env, err := binenv.Load(Asset)
-	if err != nil {
-		fmt.Println(err)
-	}
+//go:embed token.json
+var tokenData []byte
 
-	slack.Init(env["SLACK_TOKEN"], env["SLACK_CHANNEL"])
-	line.Init(env["LINE_CHANNEL_ACCESS_TOKEN"], env["LINE_CHANNEL_SECRET"], env["LINE_USER_ID"])
+type token struct {
+    slack_token string `json:"slack_token"`
+    slack_channel string `json:"slack_channel"`
+    line_channel_access_token string `json:"line_channel_access_token"`
+    line_channel_secret string `json:"line_channel_secret"`
+    line_user_id string `json:"line_user_id"`
+}
+
+func main() {
+    var t token
+    json.Unmarshal([]byte(tokenData), &t)
+	slack.Init(t.slack_token, t.slack_channel)
+	line.Init(t.line_channel_access_token, t.line_channel_secret, t.line_user_id)
 
 	flag.Parse()
 	fmt.Println(*message)
