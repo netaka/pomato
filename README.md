@@ -7,28 +7,20 @@ Potarble on messaging app tiny organizer
 - Built-in api token
 
 ## How to build
-1. Get packages
+1. Get necessary package
 
     ```
-    $ go get github.com/netaka/pomato
-    $ go get -u github.com/jteeuwen/go-bindata/...
-    $ go get github.com/kazuph/go-binenv
+    $ go get github.com/line/line-bot-sdk-go/linebot
     ```
 
-1. Edit .env file
-1. Convert .env files to bindata.go
-
-    ```
-    $ go-bindata .env
-    ```
-
+1. Edit token.json file
 1. Build go files
    
    ```
-   $ go build -o pomato main.go bindata.go
+   $ go build
    ```
 
 ## How to use
 ```
-$ pomato -m おやすみなさい
+$ pomato -m おやすみなさい -s -l
 ```
